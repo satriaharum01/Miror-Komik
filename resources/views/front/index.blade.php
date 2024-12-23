@@ -36,50 +36,57 @@
 </section><!-- /Hero Section -->
 
 <!-- About Section -->
-<section id="about" class="about section">
-
-  <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <h2>About Us<br></h2>
-    <p><span>Learn More</span> <span class="description-title">About Us</span></p>
-  </div><!-- End Section Title -->
-
+<section class="section">
   <div class="container">
 
     <div class="row gy-4">
-      <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-        <img src="assets/img/about.jpg" class="img-fluid mb-4" alt="">
-        <div class="book-a-table">
-          <h3>Book a Table</h3>
-          <p>+1 5589 55488 55</p>
-        </div>
-      </div>
-      <div class="col-lg-5" data-aos="fade-up" data-aos-delay="250">
-        <div class="content ps-0 ps-lg-5">
-          <p class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-            magna aliqua.
-          </p>
-          <ul>
-            <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</span></li>
-            <li><i class="bi bi-check-circle-fill"></i> <span>Duis aute irure dolor in reprehenderit in voluptate
-                velit.</span></li>
-            <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat
-                nulla pariatur.</span></li>
-          </ul>
-          <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-          </p>
+      <div class="col-md-8 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="100">  
+        
+        <div class="col-12">
+            <div class="card-header">
+              <h3 class="card-title">Daftar Komik {{env('APP_NAME')}}</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">  
+                @foreach($komik as $row)
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-3 comic-card">
+                  <div class="image-container my-2">
+                    <img src="{{asset('assets/img/cover/').'/'.$row->cover_image}}" class="thumbs-img" alt="Cover">
+                  </div>
+                  <div class="image-title">
+                      <a href="">
+                        <h5 class="comic-title">{{$row->title}}</h5>
+                      </a>
+                  </div>
+                  <div class="image-chapters">
+                    @foreach($row->fetchLastTwoChapters() as $chapter)
+                        <a href="">
+                         <div class="image-chapters-item">
+                          <span class="item-badge"> {{ $chapter->title }}</span> 
+                          <span class="item-time"> {{ $chapter->formatted_created_at }}</span>
+                        </div>
+                        </a>
+                    @endforeach
+                  </div>
+                </div>
+                @endforeach
+              </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <div>
+                  {{env('APP_NAME')}} - {{$title}}
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{ $komik->links('vendor.pagination.bootstrap-5') }}
+                </div>
+            </div>
 
-          <div class="position-relative mt-4">
-            <img src="assets/img/about-2.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
+        </div> 
+      </div>
+      <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="">
+              <h3>Terakhir Dibaca</h3>
           </div>
-        </div>
       </div>
     </div>
 

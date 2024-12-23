@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Yajra\DataTables\Facades\DataTables;
+//MODELS
+use App\Models\Komik;
 
 class FrontMainController extends Controller
 {
@@ -19,7 +22,16 @@ class FrontMainController extends Controller
     public function index()
     {
         $this->data['title'] = 'Baca Komik Miror';
+        $this->data['komik'] = $this->getKomik();
 
         return view('front.index', $this->data);
+    }
+
+    public function getKomik()
+    {
+
+        $komik = Komik::orderBy('title')->paginate(10);
+
+        return $komik;
     }
 }

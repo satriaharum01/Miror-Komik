@@ -8,7 +8,7 @@
     @include('layouts.front.css')
 
 </head>
-<body>
+<body class="dark-background">
     @include('layouts.front.header')
     <main class="main">
         @yield('content')
